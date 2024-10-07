@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:trackizer/assets/images.dart';
 import 'package:trackizer/modules/authentication/sign_in/controller.dart';
 import 'package:trackizer/modules/authentication/sign_up/screen.dart';
+import 'package:trackizer/modules/dashboard/view.dart';
 import 'package:trackizer/styles/colors.dart';
 import 'package:trackizer/styles/theme.dart';
 import 'package:trackizer/utils/navigator.dart';
@@ -30,7 +31,24 @@ class _Body extends StatefulWidget {
 }
 
 class __BodyState extends State<_Body> {
-  void signIn() async {}
+  void signIn() async {
+    try {
+      await context.read<SignInController>().signIn();
+
+      if (!mounted) {
+        return;
+      }
+
+      context.go(const DashboardView());
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.toString()),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

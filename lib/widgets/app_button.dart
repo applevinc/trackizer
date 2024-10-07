@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:trackizer/styles/colors.dart';
 import 'package:trackizer/styles/theme.dart';
 
 class AppButton extends StatelessWidget {
@@ -96,7 +97,7 @@ class GlowAppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = this.backgroundColor ?? const Color(0xffFF7966);
+    final backgroundColor = this.backgroundColor ?? AppColors.accentP100;
 
     return Container(
       width: double.infinity,
