@@ -31,22 +31,11 @@ class _Body extends StatefulWidget {
 }
 
 class __BodyState extends State<_Body> {
+  final formKey = GlobalKey<FormState>();
+
   void signIn() async {
-    try {
-      await context.read<SignInController>().signIn();
-
-      if (!mounted) {
-        return;
-      }
-
+    if (formKey.currentState?.validate() ?? false) {
       context.go(const DashboardView());
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
-          backgroundColor: Colors.red,
-        ),
-      );
     }
   }
 
@@ -62,12 +51,13 @@ class __BodyState extends State<_Body> {
           child: SizedBox(
             height: 0.9.sh,
             child: Form(
-              key: controller.formKey,
+              key: formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Spacer(),
                   Align(
                     alignment: Alignment.center,
                     child: Image.asset(
@@ -76,7 +66,7 @@ class __BodyState extends State<_Body> {
                       width: 146.w,
                     ),
                   ),
-                  const Spacer(),
+                  const Spacer(flex: 4),
                   CustomTextField(
                     controller: controller.emailController,
                     title: 'E-mail address',
@@ -86,13 +76,20 @@ class __BodyState extends State<_Body> {
                   PasswordTextField(
                     controller: controller.passwordController,
                     title: 'Password',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+
+                      return null;
+                    },
                   ),
                   SizedBox(height: 40.h),
                   GlowAppButton(
                     label: 'Sign In',
                     onPressed: signIn,
                   ),
-                  const Spacer(),
+                  const Spacer(flex: 3),
                   Align(
                     alignment: Alignment.center,
                     child: Text(
@@ -112,6 +109,7 @@ class __BodyState extends State<_Body> {
                       context.push(const SignUpScreen());
                     },
                   ),
+                  const Spacer(),
                 ],
               ),
             ),

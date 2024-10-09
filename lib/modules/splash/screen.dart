@@ -57,6 +57,7 @@ class SplashScreen extends StatelessWidget {
                   top: 40.h,
                   left: AppTheme.defaultPadding,
                   right: AppTheme.defaultPadding,
+                  bottom: 30.h,
                 ),
                 child: Column(
                   children: [

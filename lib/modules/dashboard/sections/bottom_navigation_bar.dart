@@ -124,7 +124,7 @@ class BottomNavBarPainter extends CustomPainter {
       ..quadraticBezierTo(size.width * 0.40, 0, size.width * 0.40, 20)
       ..arcToPoint(
         Offset(size.width * 0.60, 20),
-        radius: const Radius.circular(35),
+        radius: const Radius.circular(30),
         clockwise: false,
       )
       ..quadraticBezierTo(size.width * 0.60, 0, size.width * 0.65, 0)
