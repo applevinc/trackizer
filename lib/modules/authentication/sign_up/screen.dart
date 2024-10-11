@@ -5,6 +5,7 @@ import 'package:trackizer/assets/images.dart';
 import 'package:trackizer/modules/authentication/sign_in/screen.dart';
 import 'package:trackizer/modules/authentication/sign_up/controller.dart';
 import 'package:trackizer/modules/authentication/sign_up/sections/password_strength_indicator.dart';
+import 'package:trackizer/modules/dashboard/view.dart';
 import 'package:trackizer/styles/colors.dart';
 import 'package:trackizer/styles/theme.dart';
 import 'package:trackizer/utils/navigator.dart';
@@ -31,7 +32,13 @@ class _Body extends StatefulWidget {
 }
 
 class __BodyState extends State<_Body> {
-  void signUp() async {}
+  final _formKey = GlobalKey<FormState>();
+
+  void signUp() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      context.go(const DashboardView());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +52,7 @@ class __BodyState extends State<_Body> {
           child: SizedBox(
             height: 0.9.sh,
             child: Form(
-              key: controller.formKey,
+              key: _formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -63,6 +70,8 @@ class __BodyState extends State<_Body> {
                   CustomTextField(
                     controller: controller.emailController,
                     title: 'E-mail address',
+                    keyboardType: TextInputType.emailAddress,
+                    textCapitalization: TextCapitalization.none,
                     validator: controller.validateEmail,
                   ),
                   SizedBox(height: 20.h),
@@ -104,6 +113,7 @@ class __BodyState extends State<_Body> {
                   AppButton(
                     label: 'Sign In',
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       context.go(const SignInScreen());
                     },
                   ),

@@ -7,8 +7,6 @@ class SignUpController extends ChangeNotifier with Validator {
     passwordController = TextEditingController();
   }
 
-  final formKey = GlobalKey<FormState>();
-
   late final TextEditingController emailController;
 
   late final TextEditingController passwordController;
@@ -57,11 +55,7 @@ class SignUpController extends ChangeNotifier with Validator {
     _strengthIndicators = [false, false, false, false];
   }
 
-  Future<void> signUp() async {
-    if (formKey.currentState?.validate() ?? false) {
-      throw Exception('Sign up not implemented');
-    }
-  }
+  Future<void> signUp() async {}
 
   @override
   void dispose() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:trackizer/styles/colors.dart';
 
@@ -11,6 +12,9 @@ class CustomTextField extends StatelessWidget {
     this.obscure = false,
     this.suffixIcon,
     this.onChanged,
+    this.keyboardType,
+    this.inputFormatters,
+    this.textCapitalization = TextCapitalization.sentences,
   });
 
   final TextEditingController controller;
@@ -19,6 +23,9 @@ class CustomTextField extends StatelessWidget {
   final bool obscure;
   final Widget? suffixIcon;
   final void Function(String)? onChanged;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextCapitalization textCapitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +46,9 @@ class CustomTextField extends StatelessWidget {
           validator: validator,
           obscureText: obscure,
           onChanged: onChanged,
+          keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
+          textCapitalization: textCapitalization,
           style: TextStyle(
             fontSize: 14.sp,
           ),

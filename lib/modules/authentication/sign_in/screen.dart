@@ -70,6 +70,8 @@ class __BodyState extends State<_Body> {
                   CustomTextField(
                     controller: controller.emailController,
                     title: 'E-mail address',
+                    keyboardType: TextInputType.emailAddress,
+                    textCapitalization: TextCapitalization.none,
                     validator: controller.validateEmail,
                   ),
                   SizedBox(height: 20.h),
@@ -106,6 +108,7 @@ class __BodyState extends State<_Body> {
                   AppButton(
                     label: 'Sign Up',
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       context.push(const SignUpScreen());
                     },
                   ),
